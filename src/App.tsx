@@ -1,6 +1,7 @@
 import React from 'react';
 import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
 import {Grid, Loader} from 'semantic-ui-react';
+import {toast} from 'react-toastify';
 
 import Home from './routes/home/Home';
 import Login from './routes/login/Login';
@@ -8,9 +9,11 @@ import Example from './routes/example/Example';
 import Navbar from './shared/components/Navbar';
 import ProtectedRoute from './shared/components/ProtectedRoute';
 
+import {TOAST_CONFIG} from './constants';
 import {GlobalContext, IGlobalContext} from './shared/contexts/global.context';
 import authService from './shared/services/auth.service';
 
+import 'react-toastify/dist/ReactToastify.css';
 import 'semantic-ui-css/semantic.min.css';
 import './shared/css/Helper.css';
 import './App.css';
@@ -46,6 +49,7 @@ class App extends React.Component<{}, IAppState> {
                     };
                 });
             }).catch(error => {
+                toast.error(error.toString());
                 this.setState({
                     isAuthorizing: false
                 });
@@ -54,6 +58,7 @@ class App extends React.Component<{}, IAppState> {
     }
 
     componentDidMount() {
+        toast.configure(TOAST_CONFIG);
         this.authorize();
     }
 

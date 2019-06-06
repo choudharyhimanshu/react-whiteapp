@@ -18,7 +18,7 @@ class AuthService {
 
     async clearUserInfo(): Promise<string> {
         sessionStorage.setItem(CACHE_KEYS.USER_INFO, JSON.stringify(null));
-        return Promise.resolve('Login Successful.');
+        return Promise.resolve('Logout Successful.');
     }
 
 }

@@ -2,6 +2,7 @@ import * as React from 'react';
 import {ChangeEvent} from 'react';
 import {Redirect} from 'react-router';
 import {Button, Form, Grid, Header, Message, Segment} from 'semantic-ui-react';
+import {toast} from 'react-toastify';
 
 import {IGlobalContext, withGlobalContext} from '../../shared/contexts/global.context';
 import {UserInfo} from '../../shared/models/UserInfo';
@@ -38,7 +39,11 @@ class Login extends React.Component<ILoginProps, ILoginState> {
 
     handleLogin(): void {
         this.setState({isAuthenticating: true}, () => {
-            authService.setUserInfo(this.state.userInfo);
+            authService.setUserInfo(this.state.userInfo).then(response => {
+                toast(response);
+            }).catch(error => {
+                toast.error(error.toString());
+            });
             setTimeout(() => {
                 this.setState({isAuthenticated: true}, () => this.props.onLogin());
             }, 1000);

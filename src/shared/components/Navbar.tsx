@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Icon, Menu } from 'semantic-ui-react';
+import {toast} from 'react-toastify';
 
 import {IGlobalContext, withGlobalContext} from '../contexts/global.context';
 import authService from '../services/auth.service';
@@ -23,9 +24,9 @@ class Navbar extends React.Component<INavbarProps, {}> {
     handleLogout(): void {
         authService.clearUserInfo().then(response => {
             this.props.onLogout();
-            // TODO
+            toast(response);
         }).catch(error => {
-            // TODO
+            toast.error(error.toString());
         });
     }
 
