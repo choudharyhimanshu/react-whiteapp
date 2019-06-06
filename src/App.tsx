@@ -73,7 +73,7 @@ class App extends React.Component<{}, IAppState> {
             <>
                 <GlobalContext.Provider value={globalContext}>
                     <HashRouter>
-                        <Navbar />
+                        <Navbar onLogout={this.authorize}/>
 
                         <Switch>
                             <ProtectedRoute exact path='/' component={Home} />

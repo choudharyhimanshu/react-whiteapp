@@ -16,6 +16,11 @@ class AuthService {
         return Promise.resolve('Login Successful.');
     }
 
+    async clearUserInfo(): Promise<string> {
+        sessionStorage.setItem(CACHE_KEYS.USER_INFO, JSON.stringify(null));
+        return Promise.resolve('Login Successful.');
+    }
+
 }
 
 export default new AuthService();
